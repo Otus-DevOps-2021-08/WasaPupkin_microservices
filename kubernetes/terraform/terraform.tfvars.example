@@ -1,0 +1,11 @@
+cloud_id                 = ""
+folder_id                = ""
+zone                     = "ru-central1-a"
+subnet_id                = ""
+net_folder_id            = ""
+public_key_path          = "~/.ssh/id_rsa.pub"
+private_key_path         = "~/.ssh/id_rsa"
+service_account_key_file = "key.json"
+image_id                 = "ubuntu-18-04-lts-v20211013"
+master_nodes_count       = 1
+worker_nodes_count       = 1
