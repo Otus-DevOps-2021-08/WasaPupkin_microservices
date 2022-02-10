@@ -2,6 +2,9 @@
 - name: Install gitlab
   hosts: all
   become: true
+  vars:
+    container_name: web
+
   tasks:
     - name: Create gitlab directories
       file:
@@ -14,7 +17,7 @@
 
     - name: Up gitlab container
       docker_container:
-        name: web
+        name: "{{ container_name }}"
         image: gitlab/gitlab-ce:latest
         hostname: gitlab.example.com
         restart_policy: always
@@ -30,3 +33,15 @@
             GITLAB_OMNIBUS_CONFIG: external_url 'http://{{ ansible_host }}'
         state: started
         restart: yes
+
+    - name: Extract init root password
+      shell: "docker exec -it {{ container_name }} grep 'Password:' /etc/gitlab/initial_root_password"
+      register: initial_root_password
+      tags:
+        - password
+
+    - name: Print root init password
+      debug:
+        msg: Root {{ initial_root_password.stdout }}
+      tags:
+        - password
