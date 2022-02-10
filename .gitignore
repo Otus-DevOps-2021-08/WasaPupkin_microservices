@@ -5,5 +5,10 @@ packer/variables.json
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
+*.tfstate.*
 *.tfvars
 .terraform/
+
+src/.env
+
+kubernetes/ansible/inventory

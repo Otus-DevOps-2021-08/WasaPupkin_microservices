@@ -1,0 +1,90 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: true
+
+    - name: Config cgroupdriver
+      shell: |
+        cat >  /etc/docker/daemon.json << EOF
+        {
+            "exec-opts": ["native.cgroupdriver=systemd"],
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "100m"
+            },
+            "storage-driver": "overlay2"
+        }
+        EOF
+
+    - name: Enable the Docker daemon in systemd
+      systemd:
+        name: docker
+        enabled: yes
+        masked: no
+
+    - name: Reload docker
+      systemd:
+        daemon_reload: yes
+        name: docker.service
+        state: restarted
+
+    - name: Install tools
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [
+        'apt-transport-https',
+        'ca-certificates',
+        'curl'
+      ]
+
+    - name: Add Kubernetes official GPG key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Add kubernetes repo
+      apt_repository:
+        repo: deb [ arch=amd64,arm64 ] https://apt.kubernetes.io/ kubernetes-xenial main
+        update_cache: yes
+        state: present
+        filename: 'kubernetes'
+
+    - name: Install kubelet
+      apt:
+        name: kubelet
+        state: present
+        update_cache: true
+
+    - name: Install kubeadm
+      apt:
+        name: kubeadm
+        state: present
+
+    - name: Hold kubelet version
+      dpkg_selections:
+        name: kubelet
+        selection: hold
+
+    - name: Hold kubeadm version
+      dpkg_selections:
+        name: kubeadm
+        selection: hold
+
+- hosts: master
+  become: true
+  tasks:
+    - name: Install kubectl
+      apt:
+        name: kubectl
+        state: present
+        force: yes
+
+    - name: Hold kubectl version
+      dpkg_selections:
+        name: kubectl
+        selection: hold

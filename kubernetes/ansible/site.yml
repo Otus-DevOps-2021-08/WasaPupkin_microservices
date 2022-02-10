@@ -1,0 +1,4 @@
+---
+- import_playbook: playbooks/kube-common.yml
+- import_playbook: playbooks/kube-master.yml
+- import_playbook: playbooks/kube-worker.yml
