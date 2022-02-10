@@ -31,3 +31,15 @@ WasaPupkin microservices repository
   -p, --project-name NAME     Specify an alternate project name
                               (default: directory name)
 ```
+
+# Задание №27
+
+* Добавил манифесты
+* - post-deployment.yml
+* - ui-deployment.yml
+* - comment-deployment.yml
+* - mongo-deployment.yml
+* Создал две VM
+* Установил docker и kubernetes на обе VM. Добавил их одну как worker ноду.
+* Установил calico. Обновил конфигурацию.
+* Применил манифесты.

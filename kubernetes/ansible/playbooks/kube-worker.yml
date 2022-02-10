@@ -1,0 +1,21 @@
+---
+- hosts: master
+  become: true
+  tasks:
+
+    - name: make join command
+      shell: kubeadm token create --print-join-command
+      register: join_command
+
+    - name: set join command
+      set_fact:
+        worker_join_command: "{{ join_command.stdout }}"
+
+
+- hosts: worker
+  become: true
+  tasks:
+
+    - name: join cluster
+      shell: |
+        {{ hostvars[groups['master'][0]]['worker_join_command'] }}
