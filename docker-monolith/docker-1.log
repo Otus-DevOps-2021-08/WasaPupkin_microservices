@@ -1,0 +1,4 @@
+REPOSITORY                                                     TAG               IMAGE ID       CREATED         SIZE
+wasapupkin/ubuntu-tmp-file                                     latest            f38508d6587e   3 minutes ago   63.2MB
+ubuntu                                                         18.04             dcf4d4bef137   6 days ago      63.2MB
+hello-world                                                    latest            d1165f221234   11 months ago   13.3kB
