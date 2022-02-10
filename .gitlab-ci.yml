@@ -12,7 +12,7 @@ variables:
 
 before_script:
   - cd reddit
-  - bundle install
+#  - bundle install
 
 build_job:
   stage: build
@@ -21,11 +21,11 @@ build_job:
 
 test_unit_job:
   stage: test
-  services:
-    - mongo:latest
+#  services:
+#    - mongo:latest
   script:
 #    - ruby simpletest.rb
-    - echo 'ruby simpletest.rb'
+    - echo 'test with `ruby simpletest.rb`'
 
 test_integration_job:
   stage: test
