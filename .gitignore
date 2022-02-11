@@ -12,3 +12,4 @@ packer/variables.json
 src/.env
 
 kubernetes/ansible/inventory
+gitlab-ci/ansible/inventory
