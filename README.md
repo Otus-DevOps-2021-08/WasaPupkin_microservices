@@ -32,6 +32,15 @@ WasaPupkin microservices repository
                               (default: directory name)
 ```
 
+# Задание №20
+
+* Создал VM через web-интерфейс YC. Попробовал запустить через docker-compose. Удалил.
+* Добавил terraform и ansible для создания ВМ и развертывание omnibus версии gitlab
+* Достал root пароль от gitlab и настроил gitlab
+* Создал проект, добавил тестовые пайплайны из задания.
+* Добавил и подключил gitlab-runner.
+* Добавил в ansible таску для извлечения root пароля.
+
 # Задание №27
 
 * Добавил манифесты

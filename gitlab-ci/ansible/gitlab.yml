@@ -1,0 +1,47 @@
+---
+- name: Install gitlab
+  hosts: all
+  become: true
+  vars:
+    container_name: web
+
+  tasks:
+    - name: Create gitlab directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /srv/gitlab/config
+        - /srv/gitlab/data
+        - /srv/gitlab/logs
+
+    - name: Up gitlab container
+      docker_container:
+        name: "{{ container_name }}"
+        image: gitlab/gitlab-ce:latest
+        hostname: gitlab.example.com
+        restart_policy: always
+        volumes:
+          - '/srv/gitlab/config:/etc/gitlab'
+          - '/srv/gitlab/logs:/var/log/gitlab'
+          - '/srv/gitlab/data:/var/opt/gitlab'
+        ports:
+          - '80:80'
+          - '443:443'
+          - '2222:22'
+        env:
+            GITLAB_OMNIBUS_CONFIG: external_url 'http://{{ ansible_host }}'
+        state: started
+        restart: yes
+
+    - name: Extract init root password
+      shell: "docker exec -it {{ container_name }} grep 'Password:' /etc/gitlab/initial_root_password"
+      register: initial_root_password
+      tags:
+        - password
+
+    - name: Print root init password
+      debug:
+        msg: Root {{ initial_root_password.stdout }}
+      tags:
+        - password
