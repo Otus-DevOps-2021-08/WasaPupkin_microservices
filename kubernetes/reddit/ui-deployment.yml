@@ -1,18 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: ui-deployment
-spec:
+metadata: # Блок метаданных деплоя
+  name: ui
+  labels:
+    app: reddit
+    component: ui
+spec: # Блок спецификации деплоя
   replicas: 1
   selector:
     matchLabels:
-      app: ui
-  template:
+      app: reddit
+      component: ui
+  template: # Блок описания POD-ов
     metadata:
-      name: ui
+      name: ui-pod
       labels:
-        app: ui
+        app: reddit
+        component: ui
     spec:
       containers:
-        - image: chromko/ui
+        - image: wasapupkindockerhub/ui:2.0 # Не забудьте подставить свой образ
+#        - image: chromko/ui
           name: ui
+          env:
+            - name: ENV # Извлекаем значение из контекста запуска
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
