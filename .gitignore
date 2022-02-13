@@ -13,3 +13,6 @@ src/.env
 
 kubernetes/ansible/inventory
 gitlab-ci/ansible/inventory
+
+kubernetes/reddit/tls.crt
+kubernetes/reddit/tls.key
