@@ -6,28 +6,48 @@ services:
       - post_db:/data/db
     networks:
       - back_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   ui:
     build: ../src/ui
-    image: wasapupkindockerhub/ui:${UI_VERSION}
+    image: ${DOCKER_LOGIN}/ui:${UI_VERSION}
     ports:
       - ${UI_PORT}:${UI_PORT}/tcp
     networks:
       - front_net
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   post:
     build: ../src/post-py
-    image: wasapupkindockerhub/post:${POST_VERSION}
+    image: ${DOCKER_LOGIN}/post:${POST_VERSION}
     networks:
       - back_net
       - front_net
+    depends_on:
+      - post_db
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   comment:
     build: ../src/comment
-    image: wasapupkindockerhub/comment:${COMMENT_VERSION}
+    image: ${DOCKER_LOGIN}/comment:${COMMENT_VERSION}
     networks:
       - back_net
       - front_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   prometheus:
     build: ../monitoring/prometheus
-    image: wasapupkindockerhub/prometheus
+    image: ${DOCKER_LOGIN}/prometheus
     ports:
       - '9090:9090'
     volumes:
