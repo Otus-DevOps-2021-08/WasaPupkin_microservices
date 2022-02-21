@@ -41,6 +41,17 @@ WasaPupkin microservices repository
 * Добавил и подключил gitlab-runner.
 * Добавил в ansible таску для извлечения root пароля.
 
+# Задание №22
+
+* Запустил Prometheus в контейнере
+* Изучил интерфейс Prometheus
+* Собрал свой образ для Prometheus со своим конфигом внутри
+* Подключил Prometheus к сервисам
+* "Поиграл" с метриками и доступностью сервисов
+* Добавил Node exporter. Пересобрал образ с  Prometheus
+
+https://hub.docker.com/u/wasapupkindockerhub
+
 # Задание №27
 
 * Добавил манифесты

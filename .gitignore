@@ -10,6 +10,10 @@ packer/variables.json
 .terraform/
 
 src/.env
+docker/.env
 
 kubernetes/ansible/inventory
 gitlab-ci/ansible/inventory
+
+kubernetes/reddit/tls.key
+kubernetes/reddit/tls.crt
