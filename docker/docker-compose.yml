@@ -34,7 +34,7 @@ services:
       driver: "fluentd"
       options:
         fluentd-address: localhost:24224
-        tag: service.ui
+        tag: service.post
     environment:
       - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   comment:
