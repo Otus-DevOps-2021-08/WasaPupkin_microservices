@@ -19,7 +19,7 @@ spec:
         component: post
     spec:
       containers:
-        - image: wasapupkindockerhub/post:1.0
+        - image: wasapupkindockerhub/post
 #        - image: chromko/post
           name: post
           env:

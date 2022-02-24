@@ -19,7 +19,7 @@ spec:
         component: comment
     spec:
       containers:
-        - image: wasapupkindockerhub/comment:1.0
+        - image: wasapupkindockerhub/comment
 #        - image: chromko/comment
           name: comment
           env:

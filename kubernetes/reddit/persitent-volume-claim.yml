@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongo-pvc
 spec:
-  storageClassName: ""
+  storageClassName: yc-network-hdd
   accessModes:
     - ReadWriteOnce
   resources:
