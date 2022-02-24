@@ -7,6 +7,8 @@ kubectl apply -f ./dev-namespace.yml
 kubectl apply -n dev -f comment-deployment.yml \
   -f comment-mongo-service.yml \
   -f comment-service.yml \
+  -f mongo-volume.yml \
+  -f mongo-claim.yml \
   -f mongo-deployment.yml \
   -f mongo-service.yml \
   -f mongo-network-policy.yml \
@@ -15,8 +17,6 @@ kubectl apply -n dev -f comment-deployment.yml \
   -f post-mongo-service.yml \
   -f ui-deployment.yml \
   -f ui-service.yml \
-  -f ui-ingress.yml \
-  -f persitent-volume.yml \
-  -f persitent-volume-claim.yml
+  -f ui-ingress.yml
 
 # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=178.154.200.201"
