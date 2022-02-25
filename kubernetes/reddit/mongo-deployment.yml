@@ -1,4 +1,7 @@
 ---
+# Test, please pass me!
+# name: mongo-gce-pd-storage
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
