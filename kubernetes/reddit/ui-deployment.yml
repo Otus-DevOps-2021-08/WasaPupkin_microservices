@@ -19,7 +19,7 @@ spec: # Блок спецификации деплоя
         component: ui
     spec:
       containers:
-        - image: wasapupkindockerhub/ui:2.0 # Не забудьте подставить свой образ
+        - image: wasapupkindockerhub/ui # Не забудьте подставить свой образ
 #        - image: chromko/ui
           name: ui
           env:
